@@ -9,7 +9,10 @@
 
 .navbar-brand {
 	align-items: center;
+	color: $secondary;
+	font-weight: 600;
 	display: inline-flex;
+	text-transform: uppercase;
 
 	i {
 		color: darken($warning, 2);

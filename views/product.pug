@@ -1,7 +1,7 @@
 extends partials/layout
 
 block vars
-	- const title = 'Amazon Crawl';
+	- const title = 'Proxy Crawl';
 	- const pageID = 'product';
 
 block eod
@@ -29,67 +29,98 @@ block content
 				.container
 					ol(class="breadcrumb")
 						li(class="breadcrumb-item")
-							i.icon-home
+							a(href="/" title="Home") Home
 
 						//- Loop here
 						each val in product.breadCrumbs
 							li(class="breadcrumb-item")
 								a(href=val.link title=val.name)= val.name
 
-						li(class="breadcrumb-item active" aria-current="page") #{product.name}
+						li(class="breadcrumb-item active" aria-current="page")= product.name
 
 			//- Post Detals
 			article
 				header
 					.container
-						.row(class="g-0")
-							.col-sm-6
-								div.img-thumbnail
-									a(href=product.canonicalUrl title=product.name)
+						.row
+							.col-sm-5
+								.product-silder
+									div.img-thumbnail
 										img(class="img-fluid" src=product.mainImage alt="Main Image")
 
-								div(class="list-thumbnail")
-									//- Loop here
-									each val in product.images
-										div(class="list-item")
-											img(class="img-thumbnail" src=val alt="Thumbnail")
+									div(class="list-thumbnail")
+										//- Loop here
+										each val in product.images
+											div(class="list-item")
+												img(class="img-fluid" src=val alt="Thumbnail")
 							
-							.col-sm-6
-								.card-body
-									h4.card-title #{product.name}
+							.col-sm-7
+								.product-detail
+									h1.heading= product.name
+									
+									.raiting
+										span(class="star-rating")
+											i.icon-star-full
+											i.icon-star-full
+											i.icon-star-full
+											i.icon-star-half
+											i.icon-star-empty
 
-									.raiting 
-										span
-											i.icon-star-empty
-											i.icon-star-empty
-											i.icon-star-empty
-											i.icon-star-empty
-											i.icon-star-empty
+										span(class="review")= product.customerReview
+										span(class="pipe") |
+										span(class="count") #{product.customerReviewCount} Customer Review
 
-										| #{product.customerReview} #{product.customerReviewCount}
+									.price 
+										bdi= product.price
+									
+									p(class="description")= product.description
+									
+									.stock(class="d-flex")
+										strong Stock:
 
-									p.card-text #{product.description}
-									div
-										strong Price:  
-										span #{product.price}
-									div #{product.isPrime}
-									div
 										if product.inStock = true 
-											| In Stock 
+											span.text-success In Stock
 										else 
-											| Not Available
+											span.text-danger Not Available
 
-									div #{product.brand}					
+									.brand(class="d-flex")
+										strong Brand: 
+										span.text-uppercase #{product.brand}
+
+									.size(class="d-flex")
+										strong Size:
+										form(action="")
+											input(class="btn-check" id="size-55" type="radio" name="size" autocomplete="off")
+											label(class="btn btn-outline-secondary btn-sm" for="size-55") 55 Inch
+
+											input(class="btn-check" id="size-43" type="radio" name="size" autocomplete="off")
+											label(class="btn btn-outline-secondary btn-sm" for="size-43") 43 Inch
+
+											input(class="btn-check" id="size-32" type="radio" name="size" autocomplete="off")
+											label(class="btn btn-outline-secondary btn-sm" for="size-32") 32 Inch
+
+											input(class="btn-check" id="size-23" type="radio" name="size" checked autocomplete="off")
+											label(class="btn btn-outline-secondary btn-sm" for="size-23") 23 Inch
+
+									.action(class="d-flex")
+										.input-group(class="")
+											button(class="btn btn-outline-secondary" id="add" type="button") +
+											input(class="form-control form-control-lg" type="text" value="1" aria-label="" aria-describedby="")
+											button(class="btn btn-outline-secondary" id="remove" type="button") -
+
+										button(class="btn btn-dark btn-lg") 
+											i(class="icon-cart")
+											| Add To Cart
 					
 				section
 					.container
 						//- Tab Nav/Link
-						ul.nav(class="nav-pills mb-3" id="pills-tab" role="tablist")
+						ul.nav(class="nav-pills mb-4" id="pills-tab" role="tablist")
 							li.nav-item(role="presentation")
 								button(class="nav-link active" id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="true") Description
 
 							li.nav-item(role="presentation")
-								button(class="nav-link" id="pills-specs-tab" data-bs-toggle="pill" data-bs-target="#pills-specs" type="button" role="tab" aria-controls="pills-specs" aria-selected="false") Specification
+								button(class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info" type="button" role="tab" aria-controls="pills-info" aria-selected="false") Additional information
 							
 							li.nav-item(role="presentation")
 								button(class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews" type="button" role="tab" aria-controls="pills-reviews" aria-selected="false") Reviews
@@ -99,22 +130,24 @@ block content
 							//- Tab Pane
 							div.tab-pane(class="fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab")
 								//- Product Description
-								div 
-									p= product.description
+								p= product.description
+
 
 								//- Product Feature In list view
-								ul
+								ul(class="list-unstyled")
 									//- Loop here
 									each val in product.features
-										li= val
+										li
+											i(class="icon-checkmark")
+											span= val
 
 
 								//- Shipping Information
 								div.alert(class="alert-info")
-									p= product.shippingMessage
+									span= product.shippingMessage
 							
 							//- Tab Pane
-							div.tab-pane(class="fade show" id="pills-specs" role="tabpanel" aria-labelledby="pills-specs-tab")
+							div.tab-pane(class="fade show" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab")
 								//- Table View
 								table.table(class="table-striped")
 									tbody
@@ -128,33 +161,60 @@ block content
 							div.tab-pane(class="fade show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab")
 								//- Loop here
 								each val in product.reviews
-									div(class="bg-light p-4 mb-3")
-										strong= val.reviewerName
-										p= val.reviewerLink
-										p= val.reviewLink
-										strong= val.reviewRating
-										p= val.reviewDate
-										h5= val.reviewTitle
-										p= val.reviewText
-										p= val.reviewVotes
-										p= val.reviewCommentCount
+									div(class="customer-review")
+										
+										.d-flex 
+											.avatar
+												a(href=val.reviewerLink target="_blank" title=val.reviewerName)
+													i(class="icon-user")
+										
+											.meta
+												strong.name= val.reviewerName + "--- "
+												span.date= val.reviewDate
+											
+												.raiting
+													span.star-raiting
+														i.icon-star-full
+														i.icon-star-full
+														i.icon-star-full
+														i.icon-star-half
+														i.icon-star-empty
+
+													#{val.reviewRating}
+
+												h6.heading= val.reviewTitle
+											
+										.text-block
+											p= val.reviewText
+											//- p= val.reviewerLink
+											//- p= val.reviewLink
+											//- p= val.reviewVotes
+											//- p= val.reviewCommentCount
 
 
 			//- Aponsored Product Ads
-			section 
-				.container 
-					.row(class="row-cols-1 row-cols-md-4")
+			//- section 
+			//- 	.container 
+			//- 		.row(class="row-cols-1 row-cols-md-4")
 						//- Loop here
-						each val in product.sponsoredAds
-							.col(class="mb-3")
-								.card(class="h-100")
-									.card-image
-										a(href=val.spLink)
-											img(src="" alt=val.spTitle)
+						//- each val in product.sponsoredAds
+						//- 	.col(class="mb-3")
+						//- 		.card(class="h-100")
+						//- 			.card-image
+						//- 				a(href=val.spLink)
+						//- 					img(src="" alt=val.spTitle)
 									
-									.card-body
-										strong.text-warning= val.spAverageReview
-										p.card-text= val.spTitle
+						//- 			.card-body
+						//- 				strong.text-warning= val.spAverageReview
+						//- 				p.card-text= val.spTitle
 
-									.card-footer
-										strong= val.spPrice
+						//- 			.card-footer
+						//- 				strong= val.spPrice
+
+
+block footer
+	footer 
+		.container
+			p(class="copyright")
+				| Copyright © 2021. All rights reserved | Developed by: 
+				a(class="cta" href="https://onfusion.github.io/" target="_blank") Jawad

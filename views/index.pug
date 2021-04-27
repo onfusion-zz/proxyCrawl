@@ -1,7 +1,7 @@
 extends partials/layout
 
 block vars
-	- const title = 'Amazon Crawl';
+	- const title = 'Proxy Crawl';
 	- const pageID = 'index';
 	- const gitUrl = 'https://github.com/proxycrawl/proxycrawl-frontend-interview-test';
 
@@ -28,11 +28,11 @@ block content
 					.row(class="align-items-end mt-3")
 						.col(class="col-sm-3")
 							label(class="form-label") Token
-							input.form-control(class="form-control" name="token" type="text" required placeholder="Enter Your Token")
+							input.form-control(class="form-control form-control-lg" name="token" type="text" required placeholder="Enter Your Token")
 
 						.col(class="col-sm-6")
 							label(class="form-label") URL
-							input.form-control(class="form-control" name="url" type="url" required placeholder="Product URL")
+							input.form-control(class="form-control form-control-lg" name="url" type="url" required placeholder="Product URL")
 
 						.col(class="col-sm-3")
 							input(class="btn btn-dark w-100" type="submit" value="Submit")

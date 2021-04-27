@@ -1,0 +1,17 @@
+// Footer SCSS Style
+footer {
+	background-color: $light;
+	border-top: 1px solid $secondary;
+	font-size: $font-size-sm;
+	height: 75px;
+	padding: 1.5rem 0;
+	text-align: center;
+
+	.copyright {
+		margin: 0;
+	}
+
+	.cta {
+		text-decoration: none;
+	}
+}

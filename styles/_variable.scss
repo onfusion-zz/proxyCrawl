@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;700&display=swap");
 
-// font-family: 'Lato', sans-serif;
+// font-family: 'Open Sans', sans-serif;
 // font-family: 'Rubik', sans-serif;
 
 // Custom SCSS Variables
@@ -8,9 +8,14 @@ $lightBlue: #ebeef5;
 $blue: #2163a5;
 $secondary: #666666;
 
-// Custom Webfonts
-$font-family-base: "Lato", sans-serif;
+// Custom Font Family
+$font-family-base: "Open Sans", sans-serif;
 $font-family-heading: "Poppins", sans-serif;
+
+// $font-size-root:              null !default;
+// $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+// $font-size-sm:                $font-size-base * .875 !default;
+// $font-size-lg:                $font-size-base * 1.25 !default;
 
 // Navbar
 $navbar-height: 60px;
