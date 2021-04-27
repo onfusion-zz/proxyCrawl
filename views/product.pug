@@ -1,22 +1,160 @@
 extends partials/layout
 
 block vars
-  - const title = 'Amazon Crawl';
-  - const pageID = 'product';
+	- const title = 'Amazon Crawl';
+	- const pageID = 'product';
 
 block eod
-  script
-    +loadModule('pages/product.js')
+	script
+		+loadModule('pages/product.js')
+
+
+block header
+	header 
+		include partials/navbar
+
 
 block content
-  main
-    div Write your content here
-    if error
-      p Ups there is an error, try again
-      p= error
-    else
-      ul
-        li Check console output to see all available properties.
-        li= product.name
-        li= product.price
-        li= product.description
+	main
+		if error
+			.container
+				.alert(class="alert-danger text-center my-4")
+					span Ups there is an error, try again 
+					br
+					strong  #{error}
+
+		else
+			//- Breadcrumb
+			nav(aria-label="breadcrumb")
+				.container
+					ol(class="breadcrumb")
+						li(class="breadcrumb-item")
+							i.icon-home
+
+						//- Loop here
+						each val in product.breadCrumbs
+							li(class="breadcrumb-item")
+								a(href=val.link title=val.name)= val.name
+
+						li(class="breadcrumb-item active" aria-current="page") #{product.name}
+
+			//- Post Detals
+			article
+				header
+					.container
+						.row(class="g-0")
+							.col-sm-6
+								div.img-thumbnail
+									a(href=product.canonicalUrl title=product.name)
+										img(class="img-fluid" src=product.mainImage alt="Main Image")
+
+								div(class="list-thumbnail")
+									//- Loop here
+									each val in product.images
+										div(class="list-item")
+											img(class="img-thumbnail" src=val alt="Thumbnail")
+							
+							.col-sm-6
+								.card-body
+									h4.card-title #{product.name}
+
+									.raiting 
+										span
+											i.icon-star-empty
+											i.icon-star-empty
+											i.icon-star-empty
+											i.icon-star-empty
+											i.icon-star-empty
+
+										| #{product.customerReview} #{product.customerReviewCount}
+
+									p.card-text #{product.description}
+									div
+										strong Price:  
+										span #{product.price}
+									div #{product.isPrime}
+									div
+										if product.inStock = true 
+											| In Stock 
+										else 
+											| Not Available
+
+									div #{product.brand}					
+					
+				section
+					.container
+						//- Tab Nav/Link
+						ul.nav(class="nav-pills mb-3" id="pills-tab" role="tablist")
+							li.nav-item(role="presentation")
+								button(class="nav-link active" id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="true") Description
+
+							li.nav-item(role="presentation")
+								button(class="nav-link" id="pills-specs-tab" data-bs-toggle="pill" data-bs-target="#pills-specs" type="button" role="tab" aria-controls="pills-specs" aria-selected="false") Specification
+							
+							li.nav-item(role="presentation")
+								button(class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews" type="button" role="tab" aria-controls="pills-reviews" aria-selected="false") Reviews
+
+						//- Tab Content
+						div(class="tab-content" id="pills-tabContent")
+							//- Tab Pane
+							div.tab-pane(class="fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab")
+								//- Product Description
+								div 
+									p= product.description
+
+								//- Product Feature In list view
+								ul
+									//- Loop here
+									each val in product.features
+										li= val
+
+
+								//- Shipping Information
+								div.alert(class="alert-info")
+									p= product.shippingMessage
+							
+							//- Tab Pane
+							div.tab-pane(class="fade show" id="pills-specs" role="tabpanel" aria-labelledby="pills-specs-tab")
+								//- Table View
+								table.table(class="table-striped")
+									tbody
+										//- Loop here
+										each info in product.productInformation
+											tr
+												td= info.name 
+												td= info.value
+							
+							//- Tab Pane
+							div.tab-pane(class="fade show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab")
+								//- Loop here
+								each val in product.reviews
+									div(class="bg-light p-4 mb-3")
+										strong= val.reviewerName
+										p= val.reviewerLink
+										p= val.reviewLink
+										strong= val.reviewRating
+										p= val.reviewDate
+										h5= val.reviewTitle
+										p= val.reviewText
+										p= val.reviewVotes
+										p= val.reviewCommentCount
+
+
+			//- Aponsored Product Ads
+			section 
+				.container 
+					.row(class="row-cols-1 row-cols-md-4")
+						//- Loop here
+						each val in product.sponsoredAds
+							.col(class="mb-3")
+								.card(class="h-100")
+									.card-image
+										a(href=val.spLink)
+											img(src="" alt=val.spTitle)
+									
+									.card-body
+										strong.text-warning= val.spAverageReview
+										p.card-text= val.spTitle
+
+									.card-footer
+										strong= val.spPrice

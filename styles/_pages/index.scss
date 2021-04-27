@@ -1,0 +1,74 @@
+// Home Page SCSS Style
+
+.index {
+	section {
+		background-image: url("../images/background.jpg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		height: calc(100vh - 60px);
+		min-height: 650px;
+		position: relative;
+
+		&:before {
+			content: "";
+			background-color: rgba(0, 0, 0, 0.8);
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 0;
+		}
+
+		header {
+			position: relative;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4 {
+			color: $white;
+		}
+	}
+
+	form {
+		background-color: $white;
+		margin: 0 0 2rem 0;
+		padding: 2rem 3rem;
+		position: relative;
+
+		.form-control,
+		.form-control-lg {
+			border-radius: 0;
+			height: 60px;
+		}
+
+		.form-control-sm {
+			height: auto;
+		}
+
+		.btn {
+			border-radius: 0;
+			&:not(.btn-rest) {
+				height: 60px;
+			}
+		}
+
+		.btn-rest {
+			color: $dark;
+			padding: 0;
+			position: absolute;
+			text-decoration: none;
+			top: 2rem;
+			right: 3rem;
+		}
+
+		.input-group {
+			.input-group-text {
+				border-radius: 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,64 @@
+// Typography SCSS
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	color: $secondary;
+	font-family: $font-family-base;
+	font-size: 1rem;
+	margin: 0;
+	padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $dark;
+	font-family: $font-family-heading;
+}
+
+// Section SCSS
+section,
+.section {
+	padding: 5rem 0;
+
+	header {
+		align-items: center;
+		color: $white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 3rem 0;
+
+		h1,
+		h2,
+		h3 {
+			margin-bottom: 1rem;
+		}
+
+		p {
+			line-height: 1.75;
+		}
+	}
+}
+
+// Input Group SCSS
+.input-group {
+	.input-group-text {
+		font-size: (1rem * 0.75);
+	}
+
+	samp {
+		color: $secondary;
+		font-size: (1rem * 0.75);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}

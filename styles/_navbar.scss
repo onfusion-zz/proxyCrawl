@@ -1,0 +1,25 @@
+// Navbar SCSS Style
+.navbar {
+	height: $navbar-height;
+}
+
+.navbar-light {
+	background-color: $white;
+}
+
+.navbar-brand {
+	align-items: center;
+	display: inline-flex;
+
+	i {
+		color: darken($warning, 2);
+		font-size: 1.7rem;
+		margin-right: 10px;
+	}
+}
+
+.nav-link {
+	i {
+		margin-right: 5px;
+	}
+}

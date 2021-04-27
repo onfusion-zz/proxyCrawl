@@ -1,2 +1,13 @@
-@import "pages/index.scss";
-@import "pages/product.scss";
+// Customised Variables
+@import "variable";
+
+// Default Bootstrap SCSS
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// Custom Template SCSS
+@import "fonts";
+@import "base";
+@import "navbar";
+@import "breadcrumb";
+@import "_pages/index.scss";
+@import "_pages/product.scss";

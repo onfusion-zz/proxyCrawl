@@ -1,0 +1,9 @@
+// Breadcrumb SCSS Style
+.breadcrumb {
+	margin: 1rem 0;
+
+	.breadcrumb-item {
+		& + .breadcrumb-item {
+		}
+	}
+}
